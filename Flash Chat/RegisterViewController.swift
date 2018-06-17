@@ -31,7 +31,15 @@ class RegisterViewController: UIViewController {
     @IBAction func registerPressed(_ sender: AnyObject) {
         //TODO: Set up a new user on our Firbase database
         Auth.auth().createUser(withEmail: emailTextfield.text!, password: passwordTextfield.text!) { (authResult, error) in
-            print(error ?? "Successful created user")
+            
+            if error != nil {
+                print(error!)
+            } else {
+                //success
+                self.performSegue(withIdentifier: "goToChat", sender: self)
+            }
+            
+            
         }
         
         

@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Firebase
 
 
-class ChatViewController: UIViewController {
+class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     
     // Declare instance variables here
 
@@ -26,6 +28,9 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()
         
         //TODO: Set yourself as the delegate and datasource here:
+        messageTableView.delegate = self
+        messageTableView.dataSource = self
+        
         
         
         
@@ -45,15 +50,20 @@ class ChatViewController: UIViewController {
     ///////////////////////////////////////////
     
     //MARK: - TableView DataSource Methods
-    
-    
+
     
     //TODO: Declare cellForRowAtIndexPath here:
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
     
     
     
     //TODO: Declare numberOfRowsInSection here:
-    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        <#code#>
+    }
+
     
     
     //TODO: Declare tableViewTapped here:
@@ -107,7 +117,14 @@ class ChatViewController: UIViewController {
     @IBAction func logOutPressed(_ sender: AnyObject) {
         
         //TODO: Log out the user and send them back to WelcomeViewController
-        
+        do {
+             try Auth.auth().signOut()
+             navigationController?.popToRootViewController(animated: true)
+            
+        } catch {
+            print("Error in signing out: \(error)")
+        }
+       
         
     }
     
