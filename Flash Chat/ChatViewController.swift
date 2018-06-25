@@ -16,6 +16,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     // Declare instance variables here
     let CURRENT_HEIGHT = 50
     let KEYBOARD_HEIGHT = 258
+    let ANIMATION_DURATION = 0.5
 
     
     // We've pre-linked the IBOutlets
@@ -38,7 +39,8 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         //TODO: Set the tapGesture here:
-        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tableViewTap))
+        messageTableView.addGestureRecognizer(tapGesture)
         
 
         //TODO: Register your MessageCell.xib file here:
@@ -68,7 +70,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     //TODO: Declare tableViewTapped here:
-    
+    @objc func tableViewTap() {
+        messageTextfield.endEditing(true)
+    }
     
     
     //TODO: Declare configureTableView here:
@@ -85,13 +89,19 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     //TODO: Declare textFieldDidBeginEditing here:
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        heightConstraint.constant = CGFloat(CURRENT_HEIGHT + KEYBOARD_HEIGHT)
-        view.layoutIfNeeded() //refreshes the layout
+        UIView.animate(withDuration: ANIMATION_DURATION) {
+            self.heightConstraint.constant = CGFloat(self.CURRENT_HEIGHT + self.KEYBOARD_HEIGHT)
+            self.view.layoutIfNeeded() //refreshes the layout
+        }
     }
     
     
     //TODO: Declare textFieldDidEndEditing here:
     func textFieldDidEndEditing(_ textField: UITextField) {
+        UIView.animate(withDuration: ANIMATION_DURATION) {
+            self.heightConstraint.constant = CGFloat(self.CURRENT_HEIGHT)
+            self.view.layoutIfNeeded() //refreshes the layout
+        }
         
     }
 
