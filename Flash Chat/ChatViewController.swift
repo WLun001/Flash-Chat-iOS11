@@ -15,7 +15,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // Declare instance variables here
     let CURRENT_HEIGHT = 50
-    let KEYBOARD_HEIGHT = 250
+    let KEYBOARD_HEIGHT = 258
 
     
     // We've pre-linked the IBOutlets
